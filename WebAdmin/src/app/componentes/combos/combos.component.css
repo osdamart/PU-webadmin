@@ -1,0 +1,46 @@
+.container-fluid{
+    padding: 20px;
+}
+.card{
+    height: 450px;
+}
+.card-img-top{
+    height: 250px;
+}
+.crear{
+    padding: 20px;
+}
+
+
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+.main-table{
+    width: calc(100vw - 350px);
+    height: calc(100vh - 200px);
+    overflow-y: auto;
+    overflow-x:hidden;
+
+}
+
+.products-content{
+
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.each-product{
+    margin-top:10px;
+    margin-bottom:10px;
+}
+
+.btn{
+    margin-left:5px;
+    margin-right:5px;
+}
+
+mat-icon {
+    vertical-align: middle;
+    margin-right: 2px;
+}

@@ -1,0 +1,82 @@
+<div class="main-container">
+    
+    <mat-toolbar class="table-tb">
+        <span>Listado de usuarios ({{contador}})</span>
+        <span class="example-spacer"></span>
+        <button type="button" (click)="createDialog()"  class="btn btn-success">
+            <mat-icon >
+                add_circle_outline
+            </mat-icon>
+            <span class="text-wi">
+                Crear usuario
+            </span>
+        </button>
+    </mat-toolbar>
+
+    <mat-form-field class="table-search">
+        <input (keyup)="applyFilter($event.target.value)" class="filter" matInput/>
+        <mat-placeholder>Buscar</mat-placeholder>
+        <mat-icon matSuffix style="font-size: 1.2em">search</mat-icon>
+    </mat-form-field>
+    
+<mat-table [dataSource]="dataSource" matSort class="main-table mat-elevation-z8"  >
+
+    <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> Nombre </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.name}} {{usuario.lastname}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="email">
+        <mat-header-cell *matHeaderCellDef> Correo electrónico </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.email}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="cell_phone">
+        <mat-header-cell *matHeaderCellDef> # Teléfono </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.cell_phone}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="fechanac">
+        <mat-header-cell *matHeaderCellDef> Fecha de Nacimiento </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.fechanac}} </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="ide_card" >
+        <mat-header-cell *matHeaderCellDef> Cedula </mat-header-cell>
+        <mat-cell *matCellDef="let usuario"> {{usuario.ide_card}} </mat-cell>
+    </ng-container>
+    
+    <ng-container matColumnDef="opciones">
+        <mat-header-cell *matHeaderCellDef> Opciones </mat-header-cell>
+        <mat-cell *matCellDef="let usuario; let i=index;"> 
+            <button *ngIf="usuario.status===1" class="btn btn-primary-outline btn-sm" (click)="blockUser(usuario.id,usuario)"><mat-icon >
+                lock_outline
+            </mat-icon></button>
+            <button *ngIf="usuario.status===0" class="btn btn-primary-outline btn-sm" (click)="unblockUser(usuario.id,usuario)"><mat-icon >
+                lock_open
+            </mat-icon></button>
+            <button class="btn btn-primary-outline btn-sm" (click)="editDialog(usuario.id, usuario.ide_card, usuario.cell_phone, usuario.name, usuario.lastname, usuario.email, usuario.fechanac, usuario.status, usuario.idrolusuario, usuario.password)"><mat-icon >
+                edit
+            </mat-icon></button>
+            <button class="btn btn-primary-outline btn-sm" (click)="deleteDialog(usuario.id,usuario.name)"><mat-icon >
+                delete
+            </mat-icon></button>
+        </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rol">
+        <mat-header-cell *matHeaderCellDef > Rol </mat-header-cell>
+        <mat-cell *matCellDef="let usuario">
+            <div *ngIf="usuario.idrolusuario===1">
+                Admin
+            </div>
+            <div *ngIf="usuario.idrolusuario===2">
+                Cliente
+            </div>
+        </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="columnsToDisplay; sticky: true" ></mat-header-row>
+    <mat-row *matRowDef="let myRowData; columns: columnsToDisplay"></mat-row>
+</mat-table>
+</div>

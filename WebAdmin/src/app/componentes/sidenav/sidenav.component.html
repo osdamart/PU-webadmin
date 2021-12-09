@@ -1,0 +1,44 @@
+<mat-toolbar color="primary">
+    <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click)="sidenav.toggle()">
+        <mat-icon *ngIf="!sidenav.opened">
+            menu
+        </mat-icon>
+        <mat-icon *ngIf="sidenav.opened">
+            close
+        </mat-icon>
+    </button>
+      <span>Parrillada Uruguaya</span>
+      <span class="example-spacer"></span>
+      <button type="button" class="btn btn-danger">Login</button>
+</mat-toolbar>
+
+<mat-sidenav-container>
+    <mat-sidenav #sidenav="matSidenav" class="mat-elevation-z8">
+        <img class="avatar mat-elevation-z8" src="https://png.pngtree.com/png-vector/20190223/ourlarge/pngtree-admin-rolls-glyph-black-icon-png-image_691507.jpg" />
+
+        <h4 class="name">Ronny Andrade</h4>
+        <p class="designation">Administrador</p>
+
+        <mat-divider></mat-divider>
+
+        <mat-selection-list #shoes [multiple]="false">
+            <mat-list-option *ngFor="let opcion of opciones" [value]="opcion" [routerLink]= "opcion.route" class="menu-options">
+                <div><mat-icon >
+                    {{opcion.icon}}
+                </mat-icon>
+                <span>{{opcion.name}}</span>
+                </div>
+            </mat-list-option>
+        </mat-selection-list>
+
+        <mat-divider></mat-divider>
+
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <div class="content mat-elevation-z8">
+            
+            <router-outlet></router-outlet>
+        </div>
+        
+    </mat-sidenav-content>
+</mat-sidenav-container>

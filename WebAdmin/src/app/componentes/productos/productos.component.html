@@ -1,0 +1,36 @@
+
+<div class="main-table">
+
+        <mat-toolbar class="table-tb">
+            <span>Nuestros platos</span>
+            <span class="example-spacer"></span>
+            <button type="button" routerLink= "/sidenav/crear-producto" class="btn btn-success">
+                <mat-icon >
+                    add_circle_outline
+                </mat-icon>
+                <span class="text-wi">
+                    Agregar producto
+                </span>
+            </button>
+        </mat-toolbar>
+
+        <div class="row products-content">
+            <div class="col-md-3" *ngFor="let producto of productos">
+                <div class="card each-product">
+                    <img src="{{producto.imagen}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{producto.nombre}}</h5>
+                      <p class="card-text">{{producto.descripcion}}</p>
+                      <h5>Precio: ${{producto.precio}}</h5>
+                      <div class="text-end">
+                      <button class="btn btn-outline-primary" [routerLink]="['/sidenav/editar-producto', producto.idproducto]">Editar</button>
+                      <button class="btn btn-outline-danger" (click)="eliminarProducto(producto.idproducto)">Eliminar</button>
+                      </div>
+                    </div>
+                  </div>                
+            </div>              
+        </div>        
+    </div>
+
+
+    

@@ -1,0 +1,52 @@
+<div class="shadow-sm p-3 mb-5 bg-dark login-header">
+  <br/>PARRILLADA URUGUAYA ADMIN PANEL ACCESS<br/><br/>
+</div>
+<div class="col d-flex justify-content-center">
+  <div id="login" class="card col-lg-3">
+    <img class="login-logo" 
+    src="https://somosrestaurantes.com.ec/wp-content/uploads/2020/11/rou-logo.jpg"/>
+    <form>
+      <br/>
+      <div class="form-group">
+        <mat-icon >
+          person
+        </mat-icon><span></span>
+        <label class="lbl-text">Usuario</label>
+        <input type="text"
+        class="form-control"
+        [(ngModel)]="datainfo.email"
+        placeholder="Ingrese su usuario"
+        name="email"
+        />
+      </div>
+      <br/>
+      <div class="form-group">
+        <mat-icon >
+          lock
+      </mat-icon>
+      <label class="lbl-text">Contraseña</label>
+        <input type="password"
+        class="form-control"
+        [(ngModel)]="datainfo.password"
+        placeholder="Ingrese su contraseña"
+        name="password"
+        />
+      </div>
+      <br/>
+      <div class="col d-flex justify-content-center">
+        <button type="button"
+        class="btn btn-dark mb-2"
+        (click)="onLogin()">Iniciar Sesion</button>
+      </div>
+      <br/>
+    </form>
+  </div>
+
+</div>
+
+<br/><br/><br/>
+<footer class="text-center bg-light text-muted">
+  <br/>
+PARRILLADA URUGUAYA @2021
+<br/><br/>
+</footer>

@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <form action="">
+        <div class="form-group mb-3">
+            <input type="text" name="nombre" [(ngModel)]="usuario.name" placeholder="Nombre" class="form-control" autofocus>
+        </div>
+        <div class="form-group mb-3">
+            <input type="text" name="cedula" [(ngModel)]="usuario.ide_card" placeholder="Cédula" class="form-control" autofocus>
+        </div>
+        <div class="form-group mb-3">
+            <input type="text" name="correo" [(ngModel)]="usuario.email" placeholder="Correo" class="form-control" autofocus>
+        </div>
+        <div class="form-group mb-3">
+            <input type="text" name="telefono" [(ngModel)]="usuario.cell_phone" placeholder="Teléfono" class="form-control" autofocus>
+        </div>
+        <div *ngIf="!edit" class="form-group mb-3">
+            <input type="text" name="contraseña" [(ngModel)]="usuario.password" placeholder="Contraseña" class="form-control" autofocus>
+        </div>
+
+        <div class="form-group mb-3">
+            <input type="date" name="fecha-nacimiento" [(ngModel)]="usuario.fechanac" placeholder="Fecha de nacimiento" class="form-control" autofocus>
+        </div>
+        <div class="form-group mb-3">
+            <select class="form-control" name="estado" [(ngModel)]="usuario.status">
+                <option selected disabled>Selecciona un estado</option>
+                <option value= 1 >Activo</option>
+                <option value= 0>Inactivo</option>
+            </select>
+        </div>
+        <div class="form-group mb-3">
+            <select class="form-control" name="rol" [(ngModel)]="usuario.idrolusuario">
+                <option selected disabled>Selecciona un rol</option>
+                <option value= 1>Administrador</option>
+                <option value= 2>Cliente</option>
+            </select>
+        </div>
+        <div class="text-end">
+        <button class="btn btn-primary " (click)="edit ? actualizarUsuario() : guardarUsuario()">
+            Guardar
+        </button>
+        <button class="btn btn-danger " [mat-dialog-close]="true">Cancelar</button>
+        </div>
+    </form>
+
+</div>
+            
+  
+  
