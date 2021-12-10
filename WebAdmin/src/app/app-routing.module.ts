@@ -8,11 +8,13 @@ import { CombosComponent } from './componentes/combos/combos.component';
 import { EditarCombosComponent } from './componentes/combos/editar-combos/editar-combos.component';
 import { SidenavComponent } from './componentes/sidenav/sidenav.component';
 import { LoginComponent } from './componentes/login/login.component';
+import { AdminsComponent } from './componentes/admins/admins.component';
 
 const routes: Routes = [
   {path: 'sidenav',component:SidenavComponent,
   children:[
     {path: 'usuarios', component: UsuarioComponent},
+    {path: 'administradores', component: AdminsComponent},
     {path: 'productos', component: ProductosComponent},
     {path: 'crear-usuario', component: UsuariomodalsComponent},
     {path: 'editar-usuario/:id', component: UsuariomodalsComponent},

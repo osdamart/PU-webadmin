@@ -1,7 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {UsuarioService} from '../../../services/usuario.service';
-import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,6 +13,7 @@ export class CrearUsuarioComponent implements OnInit {
 
   validator:boolean=null;
   hide:boolean=true;
+  admin:boolean=this.data.isAdmin;
 
   get idrolusuario(){
     return this.form.get('idrolusuario')
@@ -60,14 +60,14 @@ export class CrearUsuarioComponent implements OnInit {
     email: ['',[Validators.required,Validators.email]],
     password: ['',[Validators.required]],
     fechanac: [null],
-    status: [2],
+    status: [1],
   })
 
   
 
   constructor(private usuarioService:UsuarioService,
-    private activatedRoute: ActivatedRoute,
     public dialogRef:MatDialogRef<CrearUsuarioComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder, private toastr: ToastrService,) { }
 
   
@@ -78,6 +78,10 @@ export class CrearUsuarioComponent implements OnInit {
 
   guardarUsuario(){
     console.log(this.form.value)
+    if(this.admin===false){
+      //si se crea desde la pestaña de clientes no se escoge rol, este es por defecto cliente (1)
+      this.form.value.idrolusuario=1;
+    }
     if(this.form.valid){
       this.usuarioService.saveUsuario(this.form.value).subscribe(
         res => {

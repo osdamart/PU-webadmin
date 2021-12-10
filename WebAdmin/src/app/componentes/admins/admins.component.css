@@ -1,0 +1,116 @@
+.example-spacer {
+    flex: 1 1 auto;
+  }
+
+mat-icon {
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.text-wi{
+  vertical-align: middle;
+}
+
+.main-container{
+  
+  width: calc(100vw - 350px);
+  height: calc(100vh - 150px);
+  
+}
+
+.main-table{
+
+  border-radius:10px;
+  width: calc(100vw - 350px);
+  height: calc(100vh - 220px);
+  overflow:auto;
+}
+
+.table-tb{
+  position: sticky;
+  z-index: 1001;
+}
+
+mat-form-field {
+  width: 95%;
+  margin-left:20px;
+
+}
+
+.mat-column-name{
+  flex: 0 0 25%;
+}
+
+.mat-column-ide_card{
+  flex: 0 0 12.5%;
+}
+
+.mat-column-mail{
+  flex: 0 0 20%;
+}
+
+.mat-column-cell_phone{
+  flex: 0 0 12.5%;
+}
+
+.mat-column-fechanac{
+  flex: 0 0 10%;
+}
+
+.mat-column-opciones{
+  flex: 0 0 15%;
+}
+
+.mat-column-rol{
+  flex: 0 0 10%;
+}
+
+@media (max-width: 800px){
+  
+  .main-table {
+      height: calc(100vh - 225px);
+      width: 299px;
+      justify-content: left;
+      align-items: top;
+      overflow:auto;
+  }
+
+  .table-tb span{
+    display:none;
+  }
+
+  .table-search{
+    width:275px;
+  }
+
+  .mat-column-name{
+    flex: 0 0 300px;
+  }
+  
+  .mat-column-ide_card{
+    flex: 0 0 100px;
+  }
+  
+  .mat-column-mail{
+    flex: 0 0 200px;
+  }
+  
+  .mat-column-cell_phone{
+    flex: 0 0 100px;
+  }
+  
+  .mat-column-fechanac{
+    flex: 0 0 100px;
+  }
+  
+  .mat-column-rol{
+    flex: 0 0 0%;
+  }
+
+  .mat-column-opciones{
+    flex: 0 0 150px;
+  }
+
+  
+
+}

@@ -34,6 +34,7 @@ import { CrearUsuarioComponent } from './modals/usuario/crear-usuario/crear-usua
 import { EditarUsuarioComponent } from './modals/usuario/editar-usuario/editar-usuario.component';
 import { EliminarUsuarioComponent } from './modals/usuario/eliminar-usuario/eliminar-usuario.component';
 import { ToastrModule } from 'ngx-toastr';
+import { AdminsComponent } from './componentes/admins/admins.component';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { ToastrModule } from 'ngx-toastr';
     CrearUsuarioComponent,
     EditarUsuarioComponent,
     EliminarUsuarioComponent,
+    AdminsComponent,
 
   ],
   imports: [

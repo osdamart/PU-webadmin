@@ -73,10 +73,16 @@
         <mat-header-cell *matHeaderCellDef > Rol </mat-header-cell>
         <mat-cell *matCellDef="let usuario">
             <div *ngIf="usuario.idrolusuario===1">
-                Admin
+                Cliente
             </div>
             <div *ngIf="usuario.idrolusuario===2">
-                Cliente
+                Admin
+            </div>
+            <div *ngIf="usuario.idrolusuario===3">
+                Vendedor
+            </div>
+            <div *ngIf="usuario.idrolusuario===4">
+                Encargado
             </div>
         </mat-cell>
     </ng-container>

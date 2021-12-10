@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 export class EditarUsuarioComponent implements OnInit {
 
   validator:boolean=null;
-
+  admin:boolean=this.data.isAdmin;
 
 
   get idrolusuario(){

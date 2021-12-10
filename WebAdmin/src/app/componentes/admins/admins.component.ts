@@ -13,16 +13,16 @@ import { CrearUsuarioComponent } from 'src/app/modals/usuario/crear-usuario/crea
 
 
 @Component({
-  selector: 'app-usuario',
-  templateUrl: './usuario.component.html',
-  styleUrls: ['./usuario.component.css']
+  selector: 'app-admins',
+  templateUrl: './admins.component.html',
+  styleUrls: ['./admins.component.css']
 })
-export class UsuarioComponent implements OnInit {
+export class AdminsComponent implements OnInit {
 
 
   usuarios: any = [];
   ELEMENT_DATA: Usuario[]=[];
-  columnsToDisplay: string[] = ['name','ide_card','email','cell_phone','fechanac','fechacreacion','opciones'];
+  columnsToDisplay: string[] = ['rol','name','ide_card','email','cell_phone','fechanac','fechacreacion','opciones'];
   dataSource = new MatTableDataSource<Usuario>(this.ELEMENT_DATA);
   contador: number;
   listaAdmins: Usuario[]=[];
@@ -44,7 +44,7 @@ export class UsuarioComponent implements OnInit {
       data => {
 
         for (const [key,value] of Object.entries(data)) {
-          if ( value.idrolusuario === 1){
+          if ( value.idrolusuario !== 1){
             this.listaAdmins.push(value);
           }
         }
@@ -96,7 +96,7 @@ export class UsuarioComponent implements OnInit {
     dialogConfig.autoFocus = true;
 
     this.dialog.open(CrearUsuarioComponent,{
-      data:{isAdmin:false}
+      data:{isAdmin:true}
     }).afterClosed().subscribe(result=>{
       this.refresh();
     });
@@ -105,7 +105,7 @@ export class UsuarioComponent implements OnInit {
   editDialog(id: number, ide_card: string, cell_phone: number, name:string, lastname:string, email:string, fechanac: Date, status:number, idrolusuario: number, password:string ){
     
     this.dialog.open(EditarUsuarioComponent,{
-      data: {isAdmin:false,id:id, ide_card:ide_card, cell_phone:cell_phone, name:name, lastname:lastname, email:email, fechanac:fechanac, status:status, idrolusuario:idrolusuario, password:password}
+      data: {isAdmin:true,id:id, ide_card:ide_card, cell_phone:cell_phone, name:name, lastname:lastname, email:email, fechanac:fechanac, status:status, idrolusuario:idrolusuario, password:password}
     }).afterClosed().subscribe(result=>{
       this.refresh();
     });
