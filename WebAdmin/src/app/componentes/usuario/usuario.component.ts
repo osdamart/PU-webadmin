@@ -43,14 +43,12 @@ export class UsuarioComponent implements OnInit {
   obtenerUsuarios(){
     this.usuarioService.getData().subscribe(
       data => {
-        console.log(data)
+
         for (const [key,value] of Object.entries(data)) {
-          console.log(key)
-          console.log(value)
           if ( value.idrolusuario === 2){
             this.listaAdmins.push(value);
           }
-        }console.log(this.listaAdmins)
+        }
         this.dataSource.data=this.listaAdmins  as Usuario[];
         this.dataSource.sort = this.sort;
         this.contador = this.dataSource.data.length;

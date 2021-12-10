@@ -18,6 +18,10 @@ mat-sidenav {
     text-align: center;
 }
 
+mat-list-option {
+    color:white;
+}
+
 mat-icon {
     vertical-align: middle;
     margin-right: 8px;
@@ -72,6 +76,18 @@ mat-sidenav-container {
     color: lightgrey;
 }
 
+.menu-option{
+    color:white;
+    text-align: left;
+}
+
+.submenu-option{
+    color:white;
+    text-align: left;
+    margin-left: 35px;
+    font-size: small;
+}
+
 mat-divider {
     margin-top: 16px;
     margin-bottom: 16px;
@@ -90,3 +106,6 @@ mat-divider {
         align-items: top;
     }
 }
+
+
+

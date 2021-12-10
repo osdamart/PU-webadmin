@@ -21,17 +21,28 @@
 
         <mat-divider></mat-divider>
 
-        <mat-selection-list #shoes [multiple]="false">
-            <mat-list-option *ngFor="let opcion of opciones" [value]="opcion" [routerLink]= "opcion.route" class="menu-options">
-                <div><mat-icon >
-                    {{opcion.icon}}
-                </mat-icon>
-                <span>{{opcion.name}}</span>
+        <mat-selection-list #parentList [multiple]="false" (click)="onChange(parentList)" >
+            <ng-container *ngFor="let menu of menuList">
+              <mat-list-option [value]="menu" #selectedOpt [ngClass]="{active: selectedOpt.selected}" class="menu-option">
+                <div *ngIf="menu.subMenu.length>=1">
+                    <mat-icon >{{menu.icon}}</mat-icon>
+                    <span>{{menu.name}}</span>     
                 </div>
-            </mat-list-option>
+                <div *ngIf="menu.subMenu.length===0" [routerLink]="menu.route">
+                    <mat-icon >{{menu.icon}}</mat-icon>
+                    <span>{{menu.name}}</span>
+                </div>
+              </mat-list-option>
+              <ng-container *ngIf="selected && selected.subMenu && selected.subMenu.length && menu.name===selected.name" >
+                <mat-list-option *ngFor="let submenu of selected.subMenu" [value]="submenu" #selectedSubOpt [ngClass]="{active: selectedSubOpt.selected}" [routerLink]="submenu.route" class="submenu-option">
+                    <span>{{submenu.name}}</span>
+                </mat-list-option>
+              </ng-container>
+            </ng-container>
+          
         </mat-selection-list>
-
-        <mat-divider></mat-divider>
+          
+          
 
     </mat-sidenav>
     <mat-sidenav-content>
