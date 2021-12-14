@@ -4,11 +4,11 @@ import{ Producto } from '../../modelos/productos';
 
 
 @Component({
-  selector: 'app-combos',
-  templateUrl: './combos.component.html',
-  styleUrls: ['./combos.component.css']
+  selector: 'app-adicionales',
+  templateUrl: './adicionales.component.html',
+  styleUrls: ['./adicionales.component.css']
 })
-export class CombosComponent implements OnInit {
+export class AdicionalesComponent implements OnInit {
 
   productos: Producto[] =[];
 
@@ -21,10 +21,12 @@ export class CombosComponent implements OnInit {
   obtenerProducto(){
     this.productoService.getData().subscribe(data =>{
       for (const [key,value] of Object.entries(data)) {
-        if ( value.idtipoproducto === 4){
+        if ( value.idtipoproducto === 2){
           this.productos.push(value);
         }
       }
+
+      //console.log(this.productos);
     });
   }
 

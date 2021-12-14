@@ -1,4 +1,3 @@
-import { DataSource } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import {UsuarioService} from '../../services/usuario.service';
@@ -121,7 +120,7 @@ export class UsuarioComponent implements OnInit {
 
   refresh(): void {
     this.listaAdmins=[];
-    if(this.listaAdmins===null){
+    if(this.listaAdmins.length==0){
       this.obtenerUsuarios();
     }
   }

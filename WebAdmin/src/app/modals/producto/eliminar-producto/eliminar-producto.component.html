@@ -1,0 +1,10 @@
+<div class="container-fluid">
+    <p>¿Está seguro de eliminar {{data.nombre}}?
+    </p>
+    <div class="text-end">
+    <button class="btn btn-danger " (click)="eliminarProducto()">
+        Sí
+    </button>
+    <button class="btn btn-outline-outline" [mat-dialog-close]="true">No</button>
+    </div>
+</div>

@@ -28,7 +28,7 @@ export class ProductoService {
   }
 
   updateProducto(id: string|number , updateProducto:Producto){
-    return this.http.put(this.url+`/productos/${id}`, updateProducto);
+    return this.http.put(this.url+`/productos/${id}/`, updateProducto);
   }
 
 }

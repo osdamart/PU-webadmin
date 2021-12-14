@@ -21,7 +21,6 @@ import { UsuariomodalsComponent } from './modals/usuariomodals/usuariomodals.com
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { EditarProductoComponent } from './componentes/productos/editar-producto/editar-producto.component';
 import { CombosComponent } from './componentes/combos/combos.component';
 import { EditarCombosComponent } from './componentes/combos/editar-combos/editar-combos.component';
 import { MatTreeModule } from '@angular/material/tree';
@@ -35,6 +34,12 @@ import { EditarUsuarioComponent } from './modals/usuario/editar-usuario/editar-u
 import { EliminarUsuarioComponent } from './modals/usuario/eliminar-usuario/eliminar-usuario.component';
 import { ToastrModule } from 'ngx-toastr';
 import { AdminsComponent } from './componentes/admins/admins.component';
+import { PrincipalesComponent } from './componentes/principales/principales.component';
+import { BebidasComponent } from './componentes/bebidas/bebidas.component';
+import { AdicionalesComponent } from './componentes/adicionales/adicionales.component';
+import { CrearProductoComponent } from './modals/producto/crear-producto/crear-producto.component';
+import { EliminarProductoComponent } from './modals/producto/eliminar-producto/eliminar-producto.component';
+import { EditarProductoComponent } from './modals/producto/editar-producto/editar-producto.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +47,6 @@ import { AdminsComponent } from './componentes/admins/admins.component';
     UsuarioComponent,
     ProductosComponent,
     UsuariomodalsComponent,
-    EditarProductoComponent,
     CombosComponent,
     EditarCombosComponent,
     SidenavComponent,
@@ -51,7 +55,14 @@ import { AdminsComponent } from './componentes/admins/admins.component';
     EditarUsuarioComponent,
     EliminarUsuarioComponent,
     AdminsComponent,
+    PrincipalesComponent,
+    BebidasComponent,
+    AdicionalesComponent,
+    CrearProductoComponent,
+    EliminarProductoComponent,
+    EditarProductoComponent,
 
+    
   ],
   imports: [
     BrowserModule,
