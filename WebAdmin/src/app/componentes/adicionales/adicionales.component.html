@@ -2,7 +2,7 @@
     <mat-toolbar class="table-tb">
         <span>Nuestros adicionales</span>
         <span class="example-spacer"></span>
-        <button type="button" routerLink= "/sidenav/crear-producto" class="btn btn-success">
+        <button type="button" (click)="createDialog()" class="btn btn-success">
             <mat-icon >
                 add_circle_outline
             </mat-icon>
@@ -21,8 +21,8 @@
                   <h5 class="card-text">{{producto.descripcion}}</h5>
                   <h3>Precio: ${{producto.precio}}</h3>
                   <div class="text-end child">
-                    <button class="btn btn-outline-primary" [routerLink]="['/sidenav/editar-producto', producto.idproducto]">Editar</button>
-                    <button class="btn btn-outline-danger" (click)="eliminarProducto(producto.idproducto)">Eliminar</button>
+                    <button class="btn btn-outline-primary" (click)="editDialog(producto.idproducto,producto.nombre,producto.descripcion,producto.precio,producto.imagen,producto.visible)">Editar</button>
+                    <button class="btn btn-outline-danger" (click)="deleteDialog(producto.idproducto,producto.nombre)">Eliminar</button>
                   </div>
                 </div>
             </div>                

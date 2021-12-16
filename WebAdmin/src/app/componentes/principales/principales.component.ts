@@ -37,18 +37,6 @@ export class PrincipalesComponent implements OnInit {
     });
   }
 
-  eliminarProducto(id: string){
-    this.productoService.deleteProducto(id).subscribe(
-      res => {
-        console.log(res);
-        this.obtenerProducto();
-      },
-      err => console.error(err)
-    )
-  }
-
-
-
   createDialog(){
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = false;

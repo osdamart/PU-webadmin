@@ -24,15 +24,15 @@
             <p>Miniatura</p>
         </div>
         <div class="form-group mb-3">
-            <select class="form-control" formControlName="idtipoproducto">
+            <select class="form-control" formControlName="visible">
                 <option selected>Seleccione la visibilidad del producto</option>
                 <option value= 1>Visible</option>
                 <option value= 0>No visible</option>               
             </select>
         </div>
-        <div class="form-group mb-3">
-            <div class="btn btn-success btn-block" (click)="actualizarProducto()">Guardar</div>
-            <button class="btn btn-primary" [mat-dialog-close]="true">Cancelar</button>
+        <div class="form-group mb-3 text-end">
+            <div class="btn btn-primary" (click)="actualizarProducto()">Guardar</div>
+            <button class="btn btn-danger" [mat-dialog-close]="true">Cancelar</button>
         </div>
     </form>
 </div>
