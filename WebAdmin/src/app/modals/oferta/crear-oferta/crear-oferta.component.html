@@ -1,0 +1,63 @@
+<div class="container-fluid">
+    <form [formGroup]="form">
+        <div class="form-group mb-3">
+            <input type="text" placeholder="Nombre"
+            [class.is-invalid]="nombre.invalid && nombre.touched"  
+            class="form-control" formControlName="nombre" autofocus>
+            <div *ngIf="nombre.invalid && nombre.touched">
+                <small *ngIf="nombre.errors?.required" class="text-danger">
+                    Campo obligatorio</small>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <textarea rows=3 placeholder="Descripcion" maxlength="100"
+            [class.is-invalid]="descripcion.invalid && descripcion.touched"  
+            class="form-control" formControlName="descripcion" autofocus>
+            </textarea>
+            <div *ngIf="descripcion.invalid && descripcion.touched">
+                <small *ngIf="descripcion.errors?.required" class="text-danger">
+                    Campo obligatorio</small>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <input type="number" placeholder="Descuento"
+            [class.is-invalid]="descuento.invalid && descuento.touched"   
+            class="form-control" formControlName="descuento" autofocus>
+            <div *ngIf="descuento.invalid && descuento.touched">
+                <small *ngIf="descuento.errors?.required" class="text-danger">
+                    Campo obligatorio</small>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <input type="file" placeholder="Imagen" 
+            [class.is-invalid]="imagen.invalid && imagen.touched"   
+            class="form-control" (change)="onImageChanged($event)" formControlName="imagen" autofocus>
+            <div *ngIf="imagen.invalid && imagen.touched">
+                <small *ngIf="imagen.errors?.required" class="text-danger">
+                    Campo obligatorio</small>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <input type="date" placeholder="Fecha de inicio de oferta" 
+            [class.is-invalid]="fechainicio.invalid && fechainicio.touched"   
+            class="form-control" formControlName="fechainicio" autofocus>
+            <div *ngIf="fechainicio.invalid && fechainicio.touched">
+                <small *ngIf="fechainicio.errors?.required" class="text-danger">
+                    Campo obligatorio</small>
+            </div>
+        </div>
+        <div class="form-group mb-3">
+            <input type="date" placeholder="Fecha de fin de oferta" 
+            [class.is-invalid]="fechafin.invalid && fechafin.touched"   
+            class="form-control" formControlName="fechafin" autofocus>
+            <div *ngIf="fechafin.invalid && fechafin.touched">
+                <small *ngIf="fechafin.errors?.required" class="text-danger">
+                    Campo obligatorio</small>
+            </div>
+        </div>
+        <div class="form-group mb-3 text-end">
+            <div class="btn btn-primary" (click)="guardarProducto()">Guardar</div>
+            <button class="btn btn-danger" [mat-dialog-close]="true">Cancelar</button>
+        </div>
+    </form>
+</div>

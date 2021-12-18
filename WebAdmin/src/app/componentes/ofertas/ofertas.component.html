@@ -1,0 +1,31 @@
+<div class="main-table">
+    <mat-toolbar class="table-tb">
+        <span>Nuestras ofertas</span>
+        <span class="example-spacer"></span>
+        <button type="button" (click)="createDialog()" class="btn btn-success">
+            <mat-icon >
+                add_circle_outline
+            </mat-icon>
+            <span class="text-wi">
+                Agregar oferta
+            </span>
+        </button>
+    </mat-toolbar>
+
+    <div class="row products-content" >
+        <div class="col-md-3" *ngFor="let oferta of ofertas" >
+            <div class="card each-product" >
+                <img src="{{oferta.imagen}}" class="card-img-top" alt="...">
+                <div class="card-body parent">
+                  <h4 class="card-title">{{oferta.nombre}}</h4>
+                  <h5 class="card-text">{{oferta.descripcion}}</h5>
+                  <h3>Descuento: {{oferta.descuento}}%</h3>
+                  <div class="text-end child">
+                    <button class="btn btn-outline-primary" >Editar</button>
+                    <button class="btn btn-outline-danger" (click)="deleteDialog(oferta.idoferta,oferta.nombre)" >Eliminar</button>
+                  </div>
+                </div>
+            </div>                
+        </div>              
+    </div>        
+</div>

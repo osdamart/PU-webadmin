@@ -40,6 +40,11 @@ import { AdicionalesComponent } from './componentes/adicionales/adicionales.comp
 import { CrearProductoComponent } from './modals/producto/crear-producto/crear-producto.component';
 import { EliminarProductoComponent } from './modals/producto/eliminar-producto/eliminar-producto.component';
 import { EditarProductoComponent } from './modals/producto/editar-producto/editar-producto.component';
+import { OfertasComponent } from './componentes/ofertas/ofertas.component';
+import { CuponesComponent } from './componentes/cupones/cupones.component';
+import { CrearOfertaComponent } from './modals/oferta/crear-oferta/crear-oferta.component';
+import { EditarOfertaComponent } from './modals/oferta/editar-oferta/editar-oferta.component';
+import { EliminarOfertaComponent } from './modals/oferta/eliminar-oferta/eliminar-oferta.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +66,11 @@ import { EditarProductoComponent } from './modals/producto/editar-producto/edita
     CrearProductoComponent,
     EliminarProductoComponent,
     EditarProductoComponent,
+    OfertasComponent,
+    CuponesComponent,
+    CrearOfertaComponent,
+    EditarOfertaComponent,
+    EliminarOfertaComponent,
 
     
   ],

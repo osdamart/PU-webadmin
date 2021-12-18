@@ -63,6 +63,20 @@ export class SidenavComponent implements AfterViewInit, OnInit{
         ]
       },
       {
+        name:"Promociones",
+        route:"",
+        icon: "local_offer",
+        subMenu: [
+          {
+            name:"Ofertas",
+            route:"ofertas",
+          } , {
+            name:"Cupones",
+            route:"cupones",
+          }
+        ]
+      },
+      {
         name: "Pedidos",
         route:"#",
         icon:"assignment",

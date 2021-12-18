@@ -11,6 +11,8 @@ import { AdminsComponent } from './componentes/admins/admins.component';
 import { PrincipalesComponent } from './componentes/principales/principales.component';
 import { AdicionalesComponent } from './componentes/adicionales/adicionales.component';
 import { BebidasComponent } from './componentes/bebidas/bebidas.component';
+import { OfertasComponent } from './componentes/ofertas/ofertas.component';
+import { CuponesComponent } from './componentes/cupones/cupones.component';
 
 const routes: Routes = [
   {path: 'sidenav',component:SidenavComponent,
@@ -22,6 +24,8 @@ const routes: Routes = [
     {path: 'adicionales', component: AdicionalesComponent},
     {path: 'bebidas', component: BebidasComponent},
     {path: 'combos', component: CombosComponent},
+    {path: 'ofertas', component: OfertasComponent},
+    {path: 'cupones', component: CuponesComponent},
     {path: 'crear-usuario', component: UsuariomodalsComponent},
     {path: 'editar-usuario/:id', component: UsuariomodalsComponent},
     {path: 'crear-combo', component: EditarCombosComponent},
