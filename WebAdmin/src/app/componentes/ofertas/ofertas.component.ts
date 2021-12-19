@@ -4,6 +4,8 @@ import { Oferta } from 'src/app/modelos/ofertas';
 import { MatDialog } from '@angular/material/dialog';
 import { CrearOfertaComponent } from 'src/app/modals/oferta/crear-oferta/crear-oferta.component';
 import { EliminarOfertaComponent } from 'src/app/modals/oferta/eliminar-oferta/eliminar-oferta.component';
+import { EditarOfertaComponent } from 'src/app/modals/oferta/editar-oferta/editar-oferta.component';
+import { AsignarOfertaComponent } from 'src/app/modals/oferta/asignar-oferta/asignar-oferta.component';
 
 
 @Component({
@@ -26,7 +28,7 @@ export class OfertasComponent implements OnInit {
     this.ofertaService.getData().subscribe(data=>{
       for (const [key,value] of Object.entries(data)){
         this.ofertas.push(value);
-      }console.log(this.ofertas);
+      }//console.log(this.ofertas);
     })
   }
 
@@ -37,6 +39,14 @@ export class OfertasComponent implements OnInit {
     }).afterClosed().subscribe(result=>{
       this.refresh();
     });
+  }
+
+  asignDialog(idoferta:number, nombre:string){
+    this.dialog.open(AsignarOfertaComponent,{
+      data: {idoferta:idoferta, nombre:nombre}
+    }).afterClosed().subscribe(result=>{
+      this.refresh();
+    })
   }
 
   deleteDialog(idoferta:number, nombre:string){

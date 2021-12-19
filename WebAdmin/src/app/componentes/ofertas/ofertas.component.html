@@ -20,8 +20,11 @@
                   <h4 class="card-title">{{oferta.nombre}}</h4>
                   <h5 class="card-text">{{oferta.descripcion}}</h5>
                   <h3>Descuento: {{oferta.descuento}}%</h3>
-                  <div class="text-end child">
-                    <button class="btn btn-outline-primary" >Editar</button>
+                  <h5 class="card-text">Desde {{oferta.fechainicio}}</h5>
+                  <h5 class="card-text">Hasta {{oferta.fechafin}}</h5>
+                  <div class="text-end child card-text">
+                    <button class="btn btn-outline-success" (click)="asignDialog(oferta.idoferta,oferta.nombre)">Asignar</button>
+                    <button class="btn btn-outline-primary" (click)="editDialog(oferta.idoferta,oferta.nombre)">Editar</button>
                     <button class="btn btn-outline-danger" (click)="deleteDialog(oferta.idoferta,oferta.nombre)" >Eliminar</button>
                   </div>
                 </div>

@@ -45,6 +45,7 @@ import { CuponesComponent } from './componentes/cupones/cupones.component';
 import { CrearOfertaComponent } from './modals/oferta/crear-oferta/crear-oferta.component';
 import { EditarOfertaComponent } from './modals/oferta/editar-oferta/editar-oferta.component';
 import { EliminarOfertaComponent } from './modals/oferta/eliminar-oferta/eliminar-oferta.component';
+import { AsignarOfertaComponent } from './modals/oferta/asignar-oferta/asignar-oferta.component';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { EliminarOfertaComponent } from './modals/oferta/eliminar-oferta/elimina
     CrearOfertaComponent,
     EditarOfertaComponent,
     EliminarOfertaComponent,
+    AsignarOfertaComponent,
 
     
   ],
