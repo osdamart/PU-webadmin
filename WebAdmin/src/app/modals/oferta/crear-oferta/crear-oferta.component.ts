@@ -76,7 +76,7 @@ export class CrearOfertaComponent implements OnInit {
     console.log(event);
   }
 
-  guardarProducto(){
+  guardarOferta(){
     console.log(this.form.value)
     if(this.form.valid){
       const uploadData:any = new FormData();

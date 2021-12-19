@@ -1,11 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { ProductoService } from 'src/app/services/producto.service';
-import { OfertaProductoService } from 'src/app/services/oferta-producto';
+import { OfertaService } from 'src/app/services/oferta.service';
 import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Producto } from 'src/app/modelos/productos';
-
+import { ProductoService } from 'src/app/services/producto.service';
+import { OfertaProductoService } from 'src/app/services/oferta-producto';
 
 
 @Component({
@@ -15,53 +15,143 @@ import { Producto } from 'src/app/modelos/productos';
 })
 export class EditarOfertaComponent implements OnInit {
 
-  //inicializo lista para los nombres de los productos
-  asignables: Producto[]=[];
-  idoferta = this.data.idoferta;
-  //idproducto: number;
+  imgUrl:string=this.data.imagen;
+  changed:boolean=false;
+
+  get nombre(){
+    return this.form.get('nombre')
+  }
+
+  get descripcion(){
+    return this.form.get('descripcion')
+  }
+
+  get descuento(){
+    return this.form.get('descuento')
+  }
+
+  get imagen(){
+    return this.form.get('imagen')
+  }
+
+  get visible(){
+    return this.form.get('visible')
+  }
+
+  get estado(){
+    return this.form.get('estado')
+  }
+
+  get fechainicio(){
+    return this.form.get('fechainicio')
+  }
+
+  get fechafin(){
+    return this.form.get('fechafin')
+  }
+
+  get idtipooferta(){
+    return this.form.get('idtipooferta')
+  }
+
 
 
   form: FormGroup = this.fb.group({
-    idproducto:[0],
+    nombre:[this.data.nombre,[Validators.required,]],
+    descripcion:[this.data.descripcion,[Validators.required,]],
+    descuento:[this.data.descuento,[Validators.required,]],
+    imagen:['',],
+    visible:[this.data.visible],
+    fechainicio:[this.data.fechainicio,[Validators.required,]],
+    fechafin:[this.data.fechafin,[Validators.required,]],
+    idtipooferta:[1],
+
   })
 
   constructor(private productoService:ProductoService,
     private ofertaProductoService:OfertaProductoService,
+    private ofertaService:OfertaService,
     public dialogRef:MatDialogRef<EditarOfertaComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder, private toastr: ToastrService,) { }
 
   ngOnInit(): void {
-    this.obtenerProductoNombres();
+    
   }
 
-  obtenerProductoNombres(){
-    this.productoService.getData().subscribe(data =>{
-      for (const [key, value] of Object.entries(data)) {
-        if (value.idtipoproducto === 1 || value.idtipoproducto === 4){
-          this.asignables.push(value);
-        } 
-      }console.log(this.asignables);
-    });
-  }
-
-  guardarOfertaMatch(){
-
-    const uploadData:any = new FormData();
-    uploadData.append('idoferta',this.idoferta);
-    uploadData.append('idproducto',this.form.value.idproducto);
-    console.log(this.idoferta);
-    console.log(this.form.value.idproducto);
-    console.log(uploadData);
-
-    this.ofertaProductoService.saveOfertaProducto(uploadData).subscribe(
-      res => {
-        console.log(res);
-        this.closeDialog();
-        this.toastr.success("Se ha agregado el match satisfactoriamente")
+  onImageChanged(event: any){
+    if(event.target.files){
+      this.changed=true;
+      const reader = new FileReader();
+      console.log(event.target.files[0]);
+      reader.readAsDataURL(event.target.files[0]);
+      reader.onload = (event:any)=>{
+        this.imgUrl = event.target.result;
       }
-    )
+      this.form.value.imagen = event.target.files[0];
+      console.log(event);
+    }
+    
   }
+
+  actualizarOferta(){
+    console.log(this.form.value)
+
+    if(this.form.valid){
+      if(this.changed){
+        const uploadData:any = new FormData();
+        uploadData.append('nombre', this.form.value.nombre);
+        uploadData.append('descripcion', this.form.value.descripcion);
+        uploadData.append('descuento', this.form.value.descuento);
+        uploadData.append('imagen', this.form.value.imagen, this.form.value.imagen.name);
+        uploadData.append('visible', this.form.value.visible);
+        uploadData.append('fechainicio', this.form.value.fechainicio);
+        uploadData.append('fechafin', this.form.value.fechafin);
+        uploadData.append('idtipooferta', this.form.value.idtipooferta);
+        
+        this.ofertaService.updateOferta(this.data.idoferta,uploadData).subscribe(
+          res => {
+            console.log(res);
+            this.closeDialog();
+            this.toastr.success("Se ha actualizado la oferta satisfactoriamente")
+          },
+          err =>{
+            console.error(err)
+            this.toastr.error("Ha ocurrido un error, intente de nuevo más tarde");
+          } 
+        )
+      }else{
+        console.log("editar sin cambio de imagen")
+  
+        const uploadData:any = new FormData();
+        uploadData.append('nombre', this.form.value.nombre);
+        uploadData.append('descripcion', this.form.value.descripcion);
+        uploadData.append('descuento', this.form.value.descuento);
+        uploadData.append('visible', this.form.value.visible);
+        uploadData.append('fechainicio', this.form.value.fechainicio);
+        uploadData.append('fechafin', this.form.value.fechafin);
+        uploadData.append('idtipooferta', this.form.value.idtipooferta);
+        
+        this.ofertaService.updateOferta(this.data.idoferta, uploadData).subscribe(
+          res => {
+            console.log(res);
+            this.closeDialog();
+            this.toastr.success("Se ha actualizado la oferta satisfactoriamente")
+          },
+          err =>{
+            console.error(err)
+            this.toastr.error("Ha ocurrido un error, intente de nuevo más tarde");
+          } 
+        )
+      }
+    }else{
+      this.toastr.warning("Asegurese de enviar todos los campos requeridos"); 
+    }
+    
+
+    
+  }
+
 
   closeDialog(){
     this.dialogRef.close();

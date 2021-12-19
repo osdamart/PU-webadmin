@@ -40,6 +40,14 @@ export class OfertasComponent implements OnInit {
       this.refresh();
     });
   }
+  
+  editDialog(idoferta:number,nombre:string,descripcion:string,descuento:number,imagen:string,visible:number,fechainicio:string,fechafin:string){
+    this.dialog.open(EditarOfertaComponent,{
+      data:{idoferta:idoferta,nombre:nombre,descripcion:descripcion,descuento:descuento,imagen:imagen,visible:visible,fechainicio:fechainicio,fechafin:fechafin}
+    }).afterClosed().subscribe(result=>{
+      this.refresh();
+    });
+  }
 
   asignDialog(idoferta:number, nombre:string){
     this.dialog.open(AsignarOfertaComponent,{

@@ -1,17 +1,35 @@
 <div class="container-fluid">
     <form [formGroup]="form">
+
         <div class="form-group mb-3">
             <input type="text" placeholder="Nombre" 
+            [class.is-invalid]="nombre.invalid && nombre.touched"  
             class="form-control" formControlName="nombre" autofocus>
+            <div *ngIf="nombre.invalid && nombre.touched">
+                <small *ngIf="nombre.errors?.required" class="text-danger">
+                    Campo obligatorio</small>
+            </div>
         </div>
+
         <div class="form-group mb-3">
-            <textarea rows=3 placeholder="Descripcion" 
+            <textarea rows=3 placeholder="Descripcion" maxlength="100"
+            [class.is-invalid]="descripcion.invalid && descripcion.touched"  
             class="form-control" formControlName="descripcion" autofocus>
             </textarea>
+            <div *ngIf="descripcion.invalid && descripcion.touched">
+                <small *ngIf="descripcion.errors?.required" class="text-danger">
+                    Campo obligatorio</small>
+            </div>
         </div>
+
         <div class="form-group mb-3">
             <input type="number" placeholder="Precio" 
+            [class.is-invalid]="precio.invalid && precio.touched"   
             class="form-control" formControlName="precio" autofocus>
+            <div *ngIf="precio.invalid && precio.touched">
+                <small *ngIf="precio.errors?.required" class="text-danger">
+                    Campo obligatorio</small>
+            </div>
         </div>
         
         <div class="form-group mb-3">
@@ -23,16 +41,19 @@
             <img class="text-center" src={{imgUrl}} alt={{imgUrl}} height="150px"/>
             <p>Miniatura</p>
         </div>
+
         <div class="form-group mb-3">
             <select class="form-control" formControlName="visible">
-                <option selected>Seleccione la visibilidad del producto</option>
+                <option selected disabled>Seleccione la visibilidad del producto</option>
                 <option value= 1>Visible</option>
                 <option value= 0>No visible</option>               
             </select>
         </div>
+
         <div class="form-group mb-3 text-end">
             <div class="btn btn-primary" (click)="actualizarProducto()">Guardar</div>
             <button class="btn btn-danger" [mat-dialog-close]="true">Cancelar</button>
         </div>
+        
     </form>
 </div>

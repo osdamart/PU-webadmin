@@ -13,7 +13,7 @@
         <div class="form-group mb-3">
             <label>Asignar oferta a: </label>
             <select class="form-control" formControlName="idproducto">
-                <option selected disabledc value=0>Seleccione el producto</option>
+                <option selected disabled value=0>Seleccione el producto</option>
                 <option *ngFor="let asignado of asignables" 
                     [value]="asignado.idproducto">{{asignado.nombre}}
                 </option>                               

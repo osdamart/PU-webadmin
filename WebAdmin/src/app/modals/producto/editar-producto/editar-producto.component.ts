@@ -46,12 +46,11 @@ export class EditarProductoComponent implements OnInit {
   }
 
   form: FormGroup = this.fb.group({
-    nombre:[this.data.nombre],
-    descripcion:[this.data.descripcion],
-    precio:[this.data.precio],
+    nombre:[this.data.nombre,[Validators.required,]],
+    descripcion:[this.data.descripcion,[Validators.required,]],
+    precio:[this.data.precio,[Validators.required,]],
     imagen:[""],
     visible:[this.data.visible],
-    puntos:[this.data.puntos],
     idtipoproducto:[this.rol],
 
   })

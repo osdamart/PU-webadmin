@@ -24,7 +24,7 @@
                   <h5 class="card-text">Hasta {{oferta.fechafin}}</h5>
                   <div class="text-end child card-text">
                     <button class="btn btn-outline-success" (click)="asignDialog(oferta.idoferta,oferta.nombre)">Asignar</button>
-                    <button class="btn btn-outline-primary" (click)="editDialog(oferta.idoferta,oferta.nombre)">Editar</button>
+                    <button class="btn btn-outline-primary" (click)="editDialog(oferta.idoferta,oferta.nombre,oferta.descripcion,oferta.descuento,oferta.imagen,oferta.visible,oferta.fechainicio,oferta.fechafin)">Editar</button>
                     <button class="btn btn-outline-danger" (click)="deleteDialog(oferta.idoferta,oferta.nombre)" >Eliminar</button>
                   </div>
                 </div>
