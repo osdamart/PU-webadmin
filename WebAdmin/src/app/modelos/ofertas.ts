@@ -1,5 +1,5 @@
 export interface Oferta{
-    id?: number;
+    idoferta?: number;
     nombre: string;
     descripcion: string;
     descuento: number;

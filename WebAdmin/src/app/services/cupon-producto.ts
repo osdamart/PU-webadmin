@@ -6,7 +6,7 @@ import { cuponProducto } from '../modelos/cupon-producto';
 @Injectable({
   providedIn: 'root'
 })
-export class cuponProductoService {
+export class CuponProductoService {
 
   constructor(private http: HttpClient) { }
   url: string = "https://parrilladauru.pythonanywhere.com/api/";

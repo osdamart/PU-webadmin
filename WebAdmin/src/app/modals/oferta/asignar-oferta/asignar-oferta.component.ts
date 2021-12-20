@@ -2,8 +2,7 @@ import { Component, OnInit, Inject, AfterViewInit, AfterViewChecked, ViewChild }
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { ProductoService } from 'src/app/services/producto.service';
 import { OfertaProductoService } from 'src/app/services/oferta-producto';
-import { OfertaService } from 'src/app/services/oferta.service';
-import { Form, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Producto } from 'src/app/modelos/productos';
 import { Oferta } from 'src/app/modelos/ofertas';
@@ -39,10 +38,10 @@ export class AsignarOfertaComponent implements OnInit{
     //this.obtenerAsignados();
     setTimeout(()=>{
       
-      for (let ele of this.asignables){
-        for(let ili of this.matches){
-          if (ele.idproducto==ili.idproducto){
-            this.asignados.push(ele);
+      for (let asignable of this.asignables){
+        for(let match of this.matches){
+          if (asignable.idproducto==match.idproducto){
+            this.asignados.push(asignable);
           }
         }
       }console.log(this.asignados);

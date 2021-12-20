@@ -6,6 +6,7 @@ import { CrearOfertaComponent } from 'src/app/modals/oferta/crear-oferta/crear-o
 import { EliminarOfertaComponent } from 'src/app/modals/oferta/eliminar-oferta/eliminar-oferta.component';
 import { EditarOfertaComponent } from 'src/app/modals/oferta/editar-oferta/editar-oferta.component';
 import { AsignarOfertaComponent } from 'src/app/modals/oferta/asignar-oferta/asignar-oferta.component';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -16,11 +17,17 @@ import { AsignarOfertaComponent } from 'src/app/modals/oferta/asignar-oferta/asi
 export class OfertasComponent implements OnInit {
 
   ofertas: Oferta[]=[];
+  loading: boolean=true;
 
   constructor(private ofertaService: OfertaService,
-    private dialog: MatDialog,) { }
+    private dialog: MatDialog, private toastr: ToastrService,) { }
 
   ngOnInit(): void {
+
+    setTimeout(()=>{
+      this.checkDates();
+    },1000)
+    
     this.obtenerOferta();
   }
 
@@ -29,7 +36,7 @@ export class OfertasComponent implements OnInit {
       for (const [key,value] of Object.entries(data)){
         this.ofertas.push(value);
       }//console.log(this.ofertas);
-    })
+    });this.loading=false;
   }
 
   createDialog(){
@@ -66,10 +73,88 @@ export class OfertasComponent implements OnInit {
   }
 
   refresh(): void {
+    this.loading=true;
     this.ofertas=[];
-    if(this.ofertas.length==0){
-      this.obtenerOferta();
-    }
+
+    setTimeout(()=>{
+      if(this.ofertas.length==0){
+        this.obtenerOferta();
+      }
+    },500)
+    
   }
+
+  checkDates(){
+    for(let oferta of this.ofertas){
+      const fechainicio = oferta.fechainicio;
+      const fechafin = oferta.fechafin;
+      const fecha = new Date();
+      //const fechahoy = fecha.getFullYear()+'-'+(fecha.getMonth()+1)+'-'+fecha.getDate();
+
+      var verNo=0;
+      var verSi=0;
+
+      //logica para determinar si el día de hoy se esta dentro del rango de fechas)
+      if( new Date(fechainicio).getTime() > fecha.getTime() || new Date(fechafin).getTime() < fecha.getTime()){
+        console.log("ESTE PRINT SIGNIFICA QUE EL DIA DE HOY NO ESTA DENTRO DE LAS FECHAS ESTABLECIDAS");
+        if (verNo==0){
+          const uploadData:any = new FormData();
+          uploadData.append('nombre', oferta.nombre);
+          uploadData.append('descripcion', oferta.descripcion);
+          uploadData.append('estado', 0); //CADUCADO
+          uploadData.append('idtipooferta',oferta.idtipooferta);
+  
+          this.ofertaService.updateOferta(oferta.idoferta,uploadData).subscribe(
+            res => {
+              console.log(res);
+              this.toastr.warning("La oferta "+oferta.nombre+" ha caducado");
+              
+            },
+            err =>{
+              console.error(err)
+              this.toastr.error("Ha ocurrido un error, intente de nuevo más tarde");
+            } 
+          )
+          verNo=1;
+
+          
+        }
+        verSi=0;
+
+        
+
+
+      }else{
+        console.log("AQUI SI ESTOY EN EL RANGO PERMITIDO");
+
+        if (verSi==0){
+          const uploadData:any = new FormData();
+          uploadData.append('nombre', oferta.nombre);
+          uploadData.append('descripcion', oferta.descripcion);
+          uploadData.append('estado', 1); //RESTABLECIDO
+          uploadData.append('idtipooferta',oferta.idtipooferta);
+  
+          this.ofertaService.updateOferta(oferta.idoferta,uploadData).subscribe(
+            res => {
+              console.log(res);
+              //this.toastr.success("La oferta "+oferta.nombre+" ha sido reestablecida")
+              verSi=1;
+            },
+            err =>{
+              console.error(err)
+              this.toastr.error("Ha ocurrido un error, intente de nuevo más tarde");
+            } 
+          )
+        }
+        verNo=0;
+
+        
+      }
+      
+    }this.refresh();
+    
+    
+  }
+
 
 }

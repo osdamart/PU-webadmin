@@ -1,17 +1,17 @@
 <div class="container-fluid">
     <div *ngIf="asignados.length==0">
-        Cargando...
+        <img src="https://www.softplan.com.br/wp-content/themes/softplan-2019/imagens/loading.gif" />
     </div>
     <div *ngIf="asignados.length>0">
         <h3>PRODUCTOS ASIGNADOS: </h3>
         <ul *ngFor="let producto of asignados">
             <li>{{producto.nombre}}</li>
-        </ul>
-        
+        </ul>       
     </div>
+
     <form [formGroup]="form">
         <div class="form-group mb-3">
-            <label>Asignar oferta a: </label>
+            <label class="form-label">Asignar oferta a: </label>
             <select class="form-control" formControlName="idproducto">
                 <option selected disabled value=0>Seleccione el producto</option>
                 <option *ngFor="let asignado of asignables" 

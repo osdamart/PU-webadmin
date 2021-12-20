@@ -1,5 +1,5 @@
 export interface Cupon{
-    id?: number;
+    idcupon?: number;
     cantidad: number;
     nombre: string;
     descripcion: string;
