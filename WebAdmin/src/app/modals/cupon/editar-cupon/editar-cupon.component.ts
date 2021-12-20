@@ -1,16 +1,16 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { OfertaService } from 'src/app/services/oferta.service';
+import { CuponService } from 'src/app/services/cupon.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
-  selector: 'app-editar-oferta',
-  templateUrl: './editar-oferta.component.html',
-  styleUrls: ['./editar-oferta.component.css']
+  selector: 'app-editar-cupon',
+  templateUrl: './editar-cupon.component.html',
+  styleUrls: ['./editar-cupon.component.css']
 })
-export class EditarOfertaComponent implements OnInit {
+export class EditarCuponComponent implements OnInit {
 
   imgUrl:string=this.data.imagen;
   changed:boolean=false;
@@ -31,6 +31,18 @@ export class EditarOfertaComponent implements OnInit {
     return this.form.get('imagen')
   }
 
+  get cantidad(){
+    return this.form.get('cantidad')
+  }
+
+  get preciominimo(){
+    return this.form.get('preciominimo')
+  }
+
+  get limitediario(){
+    return this.form.get('limitediario')
+  }
+
   get visible(){
     return this.form.get('visible')
   }
@@ -43,31 +55,31 @@ export class EditarOfertaComponent implements OnInit {
     return this.form.get('fechafin')
   }
 
-  get idtipooferta(){
-    return this.form.get('idtipooferta')
+  get idtipocupon(){
+    return this.form.get('idtipocupon')
   }
 
-
-
   form: FormGroup = this.fb.group({
+    cantidad:[this.data.cantidad,[Validators.required,]],
     nombre:[this.data.nombre,[Validators.required,]],
     descripcion:[this.data.descripcion,[Validators.required,]],
-    descuento:[this.data.descuento,[Validators.required,]],
+    descuento:[this.data.descuento,],
     imagen:['',],
     visible:[this.data.visible],
+    limitediario:[this.data.limitediario,],
+    preciominimo:[this.data.preciominimo,],
     fechainicio:[this.data.fechainicio,[Validators.required,]],
     fechafin:[this.data.fechafin,[Validators.required,]],
-    idtipooferta:[1],
+    idtipocupon:[1],
 
   })
 
-  constructor(private ofertaService:OfertaService,
-    public dialogRef:MatDialogRef<EditarOfertaComponent>,
+  constructor(private cuponService:CuponService,
+    public dialogRef:MatDialogRef<EditarCuponComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
     private fb: FormBuilder, private toastr: ToastrService,) { }
 
   ngOnInit(): void {
-    
   }
 
   onImageChanged(event: any){
@@ -85,26 +97,29 @@ export class EditarOfertaComponent implements OnInit {
     
   }
 
-  actualizarOferta(){
+  actualizarCupon(){
     console.log(this.form.value)
 
     if(this.form.valid){
       if(this.changed){
         const uploadData:any = new FormData();
-        uploadData.append('nombre', this.form.value.nombre);
-        uploadData.append('descripcion', this.form.value.descripcion);
-        uploadData.append('descuento', this.form.value.descuento);
-        uploadData.append('imagen', this.form.value.imagen, this.form.value.imagen.name);
-        uploadData.append('visible', this.form.value.visible);
-        uploadData.append('fechainicio', this.form.value.fechainicio);
-        uploadData.append('fechafin', this.form.value.fechafin);
-        uploadData.append('idtipooferta', this.form.value.idtipooferta);
+        uploadData.append('cantidad', this.form.value.cantidad);
+      uploadData.append('nombre', this.form.value.nombre);
+      uploadData.append('descripcion', this.form.value.descripcion);
+      uploadData.append('descuento', this.form.value.descuento);
+      uploadData.append('imagen', this.form.value.imagen, this.form.value.imagen.name);
+      uploadData.append('visible', this.form.value.visible);
+      uploadData.append('idtipocupon', this.form.value.idtipocupon);
+      uploadData.append('limitediario', this.form.value.limitediario);
+      uploadData.append('preciominimo', this.form.value.preciominimo);
+      uploadData.append('fechainicio',this.form.value.fechainicio);
+      uploadData.append('fechafin',this.form.value.fechafin);
         
-        this.ofertaService.updateOferta(this.data.idoferta,uploadData).subscribe(
+        this.cuponService.updateCupon(this.data.idcupon,uploadData).subscribe(
           res => {
             console.log(res);
             this.closeDialog();
-            this.toastr.success("Se ha actualizado la oferta satisfactoriamente")
+            this.toastr.success("Se ha actualizado el cupon satisfactoriamente")
           },
           err =>{
             console.error(err)
@@ -115,19 +130,22 @@ export class EditarOfertaComponent implements OnInit {
         console.log("editar sin cambio de imagen")
   
         const uploadData:any = new FormData();
-        uploadData.append('nombre', this.form.value.nombre);
-        uploadData.append('descripcion', this.form.value.descripcion);
-        uploadData.append('descuento', this.form.value.descuento);
-        uploadData.append('visible', this.form.value.visible);
-        uploadData.append('fechainicio', this.form.value.fechainicio);
-        uploadData.append('fechafin', this.form.value.fechafin);
-        uploadData.append('idtipooferta', this.form.value.idtipooferta);
+        uploadData.append('cantidad', this.form.value.cantidad);
+      uploadData.append('nombre', this.form.value.nombre);
+      uploadData.append('descripcion', this.form.value.descripcion);
+      uploadData.append('descuento', this.form.value.descuento);
+      uploadData.append('visible', this.form.value.visible);
+      uploadData.append('idtipocupon', this.form.value.idtipocupon);
+      uploadData.append('limitediario', this.form.value.limitediario);
+      uploadData.append('preciominimo', this.form.value.preciominimo);
+      uploadData.append('fechainicio',this.form.value.fechainicio);
+      uploadData.append('fechafin',this.form.value.fechafin);
         
-        this.ofertaService.updateOferta(this.data.idoferta, uploadData).subscribe(
+        this.cuponService.updateCupon(this.data.idcupon, uploadData).subscribe(
           res => {
             console.log(res);
             this.closeDialog();
-            this.toastr.success("Se ha actualizado la oferta satisfactoriamente")
+            this.toastr.success("Se ha actualizado el cupon satisfactoriamente")
           },
           err =>{
             console.error(err)

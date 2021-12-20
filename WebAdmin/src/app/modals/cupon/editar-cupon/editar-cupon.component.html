@@ -1,0 +1,123 @@
+<div class="container-fluid">
+    <form [formGroup]="form">
+        <div class="row">
+        <div class="row col-md-12">
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="form-label">Cantidad de cupones</label>
+                    <input type="number" placeholder="Cantidad de cupones"
+                    [class.is-invalid]="cantidad.invalid && cantidad.touched"   
+                    class="form-control" formControlName="cantidad" autofocus>
+                    <div *ngIf="cantidad.invalid && cantidad.touched">
+                        <small *ngIf="cantidad.errors?.required" class="text-danger">
+                            Campo obligatorio</small>
+                    </div>
+                </div>
+        
+                <div class="form-group mb-3">
+                    <label class="form-label">Nombre</label>
+                    <input type="text" placeholder="Nombre"
+                    [class.is-invalid]="nombre.invalid && nombre.touched"  
+                    class="form-control" formControlName="nombre" autofocus>
+                    <div *ngIf="nombre.invalid && nombre.touched">
+                        <small *ngIf="nombre.errors?.required" class="text-danger">
+                            Campo obligatorio</small>
+                    </div>
+                </div>
+        
+                <div class="form-group mb-3">
+                    <label class="form-label">Descripcion</label>
+                    <textarea rows=3 placeholder="Descripcion" maxlength="100"
+                    [class.is-invalid]="descripcion.invalid && descripcion.touched"  
+                    class="form-control" formControlName="descripcion" autofocus>
+                    </textarea>
+                    <div *ngIf="descripcion.invalid && descripcion.touched">
+                        <small *ngIf="descripcion.errors?.required" class="text-danger">
+                            Campo obligatorio</small>
+                    </div>
+                </div>
+        
+                <div class="form-group mb-3">
+                    <label class="form-label">Descuento</label>
+                    <input type="number" placeholder="Descuento"
+                    class="form-control" formControlName="descuento" autofocus>
+                    <div *ngIf="descuento.invalid && descuento.touched">
+                        <small *ngIf="descuento.errors?.required" class="text-danger">
+                            Campo obligatorio</small>
+                    </div>
+                </div>
+        
+                <div class="form-group mb-3">
+                    <label class="form-label">Precio mínimo para aplicar el cupón</label>
+                    <input type="number" placeholder="Precio mínimo para aplicar al cupón"
+                    class="form-control" formControlName="preciominimo" autofocus>
+                </div>
+        
+                <div class="form-group mb-3">
+                    <label class="form-label">Límite de usos diarios del cupón</label>
+                    <select class="form-control" formControlName="limitediario">
+                        <option selected disabled>Seleccione cantidad de usos por día</option>
+                        <option value= 1>1</option>
+                        <option value= 2>2</option>      
+                        <option value= 3>3</option>           
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group mb-3">
+                    <label class="form-label">Imagen</label>
+                    <input type="file" placeholder="Imagen" 
+                    [class.is-invalid]="imagen.invalid && imagen.touched"   
+                    class="form-control" (change)="onImageChanged($event)" formControlName="imagen" autofocus>
+                </div>
+                <div class="form-group mb-3 border rounded text-center">
+                    <br>
+                    <img class="text-center" src={{imgUrl}} alt={{imgUrl}} height="125px"/>
+                    <p>Miniatura</p>
+                </div>
+        
+                <div class="form-group mb-3">
+                    <label class="form-label">Fecha de inicio de cupon</label>
+                    <input type="date" placeholder="Fecha de inicio de cupón" 
+                    [class.is-invalid]="fechainicio.invalid && fechainicio.touched"   
+                    class="form-control" formControlName="fechainicio" autofocus>
+                    <div *ngIf="fechainicio.invalid && fechainicio.touched">
+                        <small *ngIf="fechainicio.errors?.required" class="text-danger">
+                            Campo obligatorio</small>
+                    </div>
+                </div>
+                
+                <div class="form-group mb-3">
+                    <label class="form-label">Fecha de caducidad de cupon</label>
+                    <input type="date" placeholder="Fecha de caducidad de cupón" 
+                    [class.is-invalid]="fechafin.invalid && fechafin.touched"   
+                    class="form-control" formControlName="fechafin" autofocus>
+                    <div *ngIf="fechafin.invalid && fechafin.touched">
+                        <small *ngIf="fechafin.errors?.required" class="text-danger">
+                            Campo obligatorio</small>
+                    </div>
+                </div>
+        
+                <div class="form-group mb-3">
+                    <select class="form-control" formControlName="visible">
+                        <option selected disabled>Seleccione la visibilidad de la oferta</option>
+                        <option value= 1>Visible</option>
+                        <option value= 0>No visible</option>               
+                    </select>
+                </div>
+
+                <div class="form-group mb-3 text-end">
+                    <div class="btn btn-primary" (click)="actualizarCupon()">Guardar</div>
+                    <button class="btn btn-danger" [mat-dialog-close]="true">Cancelar</button>
+                </div>
+            </div>
+        </div>
+        
+
+        
+
+        
+        </div>
+    </form>
+</div>

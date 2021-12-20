@@ -1,1 +1,41 @@
-<p>ofertas works!</p>
+
+
+<div class="main-table">
+    <mat-toolbar class="table-tb">
+        <span>Nuestros cupones</span>
+        <span class="example-spacer"></span>
+        <button type="button" (click)="createDialog()" class="btn btn-success">
+            <mat-icon >
+                add_circle_outline
+            </mat-icon>
+            <span class="text-wi">
+                Agregar cupon
+            </span>
+        </button>
+    </mat-toolbar>
+
+    <div *ngIf="loading==true" class="text-center align-middle">
+        <img src="https://www.softplan.com.br/wp-content/themes/softplan-2019/imagens/loading.gif" />
+    </div>
+
+    <div *ngIf="loading==false" class="row products-content" >
+        <div class="col-md-3" *ngFor="let cupon of cupones" >
+            <div class="card each-product" >
+                <img src="{{cupon.imagen}}" class="card-img-top" alt="...">
+                <div class="card-body parent">
+                  <h4 class="card-title">{{cupon.nombre}} (stock: {{cupon.cantidad}}) </h4>
+                  <h5 class="card-text">{{cupon.descripcion}}</h5>
+                  <h3>Descuento: {{cupon.descuento}}%</h3>
+                  <h5 *ngIf="cupon.preciominimo>0" class="card-text">Precio mínimo: {{cupon.preciominimo}}</h5> 
+                  <h5 class="card-text">Desde {{cupon.fechainicio}}</h5>
+                  <h5 class="card-text">Hasta {{cupon.fechafin}}</h5>
+                  <div class="text-end child card-text">
+                    <button class="btn btn-outline-success" >Asignar</button>
+                    <button class="btn btn-outline-primary" (click)="editDialog(cupon.idcupon,cupon.nombre,cupon.descripcion,cupon.descuento,cupon.imagen,cupon.visible,cupon.fechainicio,cupon.fechafin,cupon.limitediario,cupon.cantidad,cupon.preciominimo)" >Editar</button>
+                    <button class="btn btn-outline-danger" (click)="deleteDialog(cupon.idcupon,cupon.nombre)" >Eliminar</button>
+                  </div>
+                </div>
+            </div>                
+        </div>              
+    </div>        
+</div>

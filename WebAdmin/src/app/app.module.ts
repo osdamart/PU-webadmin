@@ -46,6 +46,10 @@ import { CrearOfertaComponent } from './modals/oferta/crear-oferta/crear-oferta.
 import { EditarOfertaComponent } from './modals/oferta/editar-oferta/editar-oferta.component';
 import { EliminarOfertaComponent } from './modals/oferta/eliminar-oferta/eliminar-oferta.component';
 import { AsignarOfertaComponent } from './modals/oferta/asignar-oferta/asignar-oferta.component';
+import { AsignarCuponComponent } from './modals/cupon/asignar-cupon/asignar-cupon.component';
+import { CrearCuponComponent } from './modals/cupon/crear-cupon/crear-cupon.component';
+import { EditarCuponComponent } from './modals/cupon/editar-cupon/editar-cupon.component';
+import { EliminarCuponComponent } from './modals/cupon/eliminar-cupon/eliminar-cupon.component';
 
 @NgModule({
   declarations: [
@@ -73,6 +77,10 @@ import { AsignarOfertaComponent } from './modals/oferta/asignar-oferta/asignar-o
     EditarOfertaComponent,
     EliminarOfertaComponent,
     AsignarOfertaComponent,
+    AsignarCuponComponent,
+    CrearCuponComponent,
+    EditarCuponComponent,
+    EliminarCuponComponent,
 
     
   ],
