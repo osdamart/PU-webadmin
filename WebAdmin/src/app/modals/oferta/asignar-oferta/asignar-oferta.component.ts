@@ -21,7 +21,8 @@ export class AsignarOfertaComponent implements OnInit{
   idoferta = this.data.idoferta;
   asignados: Producto[]=[];
   //idproducto: number;
-  matches: ofertaProducto[]=[]; 
+  matches: ofertaProducto[]=[];
+  loading: boolean=true;
 
   form: FormGroup = this.fb.group({
     idproducto:[0],
@@ -34,19 +35,9 @@ export class AsignarOfertaComponent implements OnInit{
     private fb: FormBuilder, private toastr: ToastrService,) { }
 
   ngOnInit(): void {
+    
     this.obtenerAsignados();
-    //this.obtenerAsignados();
-    setTimeout(()=>{
-      
-      for (let asignable of this.asignables){
-        for(let match of this.matches){
-          if (asignable.idproducto==match.idproducto){
-            this.asignados.push(asignable);
-          }
-        }
-      }console.log(this.asignados);
-
-      },1000)
+    
   } 
 
 
@@ -66,7 +57,24 @@ export class AsignarOfertaComponent implements OnInit{
 
     this.obtenerProductos();
     this.obtenerMatches();
-    
+
+    setTimeout(()=>{
+      this.loading=false;
+    },500)
+
+    setTimeout(()=>{
+      
+      for (let asignable of this.asignables){
+        for(let match of this.matches){
+          if (asignable.idproducto==match.idproducto){
+            this.asignados.push(asignable);
+          }
+        }
+      }console.log(this.asignados);
+
+      },500)
+    this.loading=true;
+
   }
 
   obtenerMatches(){

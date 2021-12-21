@@ -13,6 +13,7 @@ import { ToastrService } from 'ngx-toastr';
 export class EditarProductoComponent implements OnInit {
 
   rol:number=this.data.idRol;
+  imgFile: File = null;
   imgUrl:string=this.data.imagen;
   changed:boolean=false;
   
@@ -48,7 +49,7 @@ export class EditarProductoComponent implements OnInit {
   form: FormGroup = this.fb.group({
     nombre:[this.data.nombre,[Validators.required,]],
     descripcion:[this.data.descripcion,[Validators.required,]],
-    precio:[this.data.precio,[Validators.required,]],
+    precio:[this.data.precio,[Validators.required,Validators.pattern("^[0-9]*[.]?[0-9]*$"),]],
     imagen:[""],
     visible:[this.data.visible],
     idtipoproducto:[this.rol],
@@ -74,7 +75,7 @@ export class EditarProductoComponent implements OnInit {
         this.imgUrl = event.target.result;
       }
       this.form.value.imagen = event.target.files[0];
-      console.log(event);
+      this.imgFile = <File>event.target.files[0];
     }
     
   }
@@ -88,7 +89,7 @@ export class EditarProductoComponent implements OnInit {
         uploadData.append('nombre', this.form.value.nombre);
         uploadData.append('descripcion', this.form.value.descripcion);
         uploadData.append('precio', this.form.value.precio);
-        uploadData.append('imagen', this.form.value.imagen, this.form.value.imagen.name);
+        uploadData.append('imagen', this.imgFile, this.imgFile.name);
         uploadData.append('visible', this.form.value.visible);
         uploadData.append('idtipoproducto', this.form.value.idtipoproducto);
         
@@ -120,13 +121,13 @@ export class EditarProductoComponent implements OnInit {
             this.toastr.success("Se ha actualizado el producto satisfactoriamente")
           },
           err =>{
-            console.error(err)
+            console.error(err);
             this.toastr.error("Ha ocurrido un error, intente de nuevo más tarde");
           } 
         )
       }
     }else{
-      this.toastr.warning("Asegurese de enviar todos los campos requeridos"); 
+      this.toastr.warning("Asegurese de enviar los campos tal como se solicita"); 
     }
     
 

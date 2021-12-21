@@ -11,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CrearProductoComponent implements OnInit {
 
+  imgFile: File = null;
   rol:number=this.data.idRol;
 
   get nombre(){
@@ -44,7 +45,7 @@ export class CrearProductoComponent implements OnInit {
   form: FormGroup = this.fb.group({
     nombre:['',[Validators.required,]],
     descripcion:['',[Validators.required,]],
-    precio:[0,[Validators.required,]],
+    precio:[0,[Validators.required,Validators.pattern("^[0-9]*[.]?[0-9]*$"),]],
     imagen:['',[Validators.required,]],
     visible:[1],
     puntos:[5],
@@ -61,8 +62,10 @@ export class CrearProductoComponent implements OnInit {
   }
 
   onImageChanged(event: any){
+      
     this.form.value.imagen = event.target.files[0];
-    console.log(event);
+    this.imgFile = <File>event.target.files[0];
+
   }
 
   guardarProducto(){
@@ -72,7 +75,7 @@ export class CrearProductoComponent implements OnInit {
       uploadData.append('nombre', this.form.value.nombre);
       uploadData.append('descripcion', this.form.value.descripcion);
       uploadData.append('precio', this.form.value.precio);
-      uploadData.append('imagen', this.form.value.imagen, this.form.value.imagen.name);
+      uploadData.append('imagen', this.imgFile, this.imgFile.name);
       uploadData.append('visible', this.form.value.visible);
       uploadData.append('idtipoproducto', this.form.value.idtipoproducto);
       uploadData.append('puntos',this.form.value.puntos);
@@ -91,7 +94,8 @@ export class CrearProductoComponent implements OnInit {
       } 
     )
     }else{
-      this.toastr.warning("Asegurese de enviar todos los campos requeridos"); 
+
+      this.toastr.warning("Asegurese de enviar los campos tal como se solicita"); 
     }
     
   }

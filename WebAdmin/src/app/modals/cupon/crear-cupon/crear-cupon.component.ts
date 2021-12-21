@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CrearCuponComponent implements OnInit {
 
+  imgFile: File = null;
+
   get nombre(){
     return this.form.get('nombre')
   }
@@ -61,15 +63,15 @@ export class CrearCuponComponent implements OnInit {
   }
 
   form: FormGroup = this.fb.group({
-    cantidad:[0,[Validators.required,]],
+    cantidad:[0,[Validators.required,Validators.pattern("^[0-9]*$"),]],
     nombre:['',[Validators.required,]],
     descripcion:['',[Validators.required,]],
-    descuento:[0,],
+    descuento:[0,[Validators.required,Validators.pattern("^[0-9]*[.]?[0-9]*$"),]],
     imagen:['',[Validators.required,]],
     visible:[1],
     estado:[1],
     limitediario:[1,],
-    preciominimo:[0,],
+    preciominimo:[0,[Validators.required,Validators.pattern("^[0-9]*[.]?[0-9]*$"),]],
     fechainicio:[null,[Validators.required,]],
     fechafin:[null,[Validators.required,]],
     idtipocupon:[1],
@@ -86,7 +88,7 @@ export class CrearCuponComponent implements OnInit {
 
   onImageChanged(event: any){
     this.form.value.imagen = event.target.files[0];
-    console.log(event.target.files[0]);
+    this.imgFile = <File>event.target.files[0];
   }
 
   guardarCupon(){
@@ -97,7 +99,7 @@ export class CrearCuponComponent implements OnInit {
       uploadData.append('nombre', this.form.value.nombre);
       uploadData.append('descripcion', this.form.value.descripcion);
       uploadData.append('descuento', this.form.value.descuento);
-      uploadData.append('imagen', this.form.value.imagen, this.form.value.imagen.name);
+      uploadData.append('imagen', this.imgFile, this.imgFile.name);
       uploadData.append('visible', this.form.value.visible);
       uploadData.append('idtipocupon', this.form.value.idtipocupon);
       uploadData.append('estado',this.form.value.estado);
@@ -120,7 +122,7 @@ export class CrearCuponComponent implements OnInit {
       } 
     )
     }else{
-      this.toastr.warning("Asegurese de enviar todos los campos requeridos"); 
+      this.toastr.warning("Asegurese de enviar los campos tal como se solicita"); 
     }
 
     

@@ -12,6 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CrearOfertaComponent implements OnInit {
 
+  imgFile: File = null;
+
   get nombre(){
     return this.form.get('nombre')
   }
@@ -53,7 +55,7 @@ export class CrearOfertaComponent implements OnInit {
   form: FormGroup = this.fb.group({
     nombre:['',[Validators.required,]],
     descripcion:['',[Validators.required,]],
-    descuento:[0,[Validators.required,]],
+    descuento:[0,[Validators.required,Validators.pattern("^[0-9]*[.]?[0-9]*$"),]],
     imagen:['',[Validators.required,]],
     visible:[1],
     estado:[1],
@@ -73,7 +75,7 @@ export class CrearOfertaComponent implements OnInit {
 
   onImageChanged(event: any){
     this.form.value.imagen = event.target.files[0];
-    console.log(event);
+    this.imgFile = <File>event.target.files[0];
   }
 
   guardarOferta(){
@@ -83,7 +85,7 @@ export class CrearOfertaComponent implements OnInit {
       uploadData.append('nombre', this.form.value.nombre);
       uploadData.append('descripcion', this.form.value.descripcion);
       uploadData.append('descuento', this.form.value.descuento);
-      uploadData.append('imagen', this.form.value.imagen, this.form.value.imagen.name);
+      uploadData.append('imagen', this.imgFile, this.imgFile.name);
       uploadData.append('visible', this.form.value.visible);
       uploadData.append('idtipooferta', this.form.value.idtipooferta);
       uploadData.append('estado',this.form.value.estado);
@@ -104,7 +106,7 @@ export class CrearOfertaComponent implements OnInit {
       } 
     )
     }else{
-      this.toastr.warning("Asegurese de enviar todos los campos requeridos"); 
+      this.toastr.warning("Asegurese de enviar los campos requeridos tal como se solicita"); 
     }
 
     

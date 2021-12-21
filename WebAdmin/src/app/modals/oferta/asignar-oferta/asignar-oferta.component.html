@@ -1,27 +1,36 @@
 <div class="container-fluid">
-    <div *ngIf="asignados.length==0">
+
+    <div *ngIf="loading==true" class="text-center align-middle">
         <img src="https://www.softplan.com.br/wp-content/themes/softplan-2019/imagens/loading.gif" />
     </div>
-    <div *ngIf="asignados.length>0">
-        <h3>PRODUCTOS ASIGNADOS: </h3>
-        <ul *ngFor="let producto of asignados">
-            <li>{{producto.nombre}}</li>
-        </ul>       
-    </div>
 
-    <form [formGroup]="form">
-        <div class="form-group mb-3">
-            <label class="form-label">Asignar oferta a: </label>
-            <select class="form-control" formControlName="idproducto">
-                <option selected disabled value=0>Seleccione el producto</option>
-                <option *ngFor="let asignado of asignables" 
-                    [value]="asignado.idproducto">{{asignado.nombre}}
-                </option>                               
-            </select>
+    <div *ngIf="loading==false">
+        <div *ngIf="asignados.length==0">
+            <p>Aún no hay productos asignados a esta oferta</p>
+            <br>
         </div>
-        <div class="form-group mb-3 text-end">
-            <div class="btn btn-primary" (click)="guardarOfertaMatch()">Guardar</div>
-            <button class="btn btn-danger" [mat-dialog-close]="true">Cancelar</button>
+        <div *ngIf="asignados.length>0">
+            <h3>PRODUCTOS ASIGNADOS: </h3>
+            <ul *ngFor="let producto of asignados">
+                <li>{{producto.nombre}}</li>
+            </ul>       
         </div>
-    </form>
+    
+        <form [formGroup]="form">
+            <div class="form-group mb-3">
+                <label class="form-label">Asignar oferta a: </label>
+                <select class="form-control" formControlName="idproducto">
+                    <option selected disabled value=0>Seleccione el producto</option>
+                    <option *ngFor="let asignado of asignables" 
+                        [value]="asignado.idproducto">{{asignado.nombre}}
+                    </option>                               
+                </select>
+            </div>
+            <div class="form-group mb-3 text-end">
+                <div class="btn btn-primary" (click)="guardarOfertaMatch()">Guardar</div>
+                <button class="btn btn-danger" [mat-dialog-close]="true">Cancelar</button>
+            </div>
+        </form>
+    </div>
+    
 </div>

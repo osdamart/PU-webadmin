@@ -23,12 +23,16 @@
         </div>
 
         <div class="form-group mb-3">
-            <input type="number" placeholder="Descuento"
+            <input type="text" placeholder="Descuento"
             [class.is-invalid]="descuento.invalid && descuento.touched"   
             class="form-control" formControlName="descuento" autofocus>
             <div *ngIf="descuento.invalid && descuento.touched">
+                <small *ngIf="descuento.errors?.pattern" class="text-danger">
+                    Este campo solo puede contener número</small>
+            </div>
+            <div *ngIf="descuento.invalid && descuento.touched">
                 <small *ngIf="descuento.errors?.required" class="text-danger">
-                    Campo obligatorio</small>
+                    Campo obligatorio </small>
             </div>
         </div>
 

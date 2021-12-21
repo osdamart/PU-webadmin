@@ -22,6 +22,7 @@ export class AsignarCuponComponent implements OnInit {
   asignados: Producto[]=[];
   //idproducto: number;
   matches: cuponProducto[]=[]; 
+  loading: boolean=true;
 
   form: FormGroup = this.fb.group({
     idproducto:[0],
@@ -35,18 +36,8 @@ export class AsignarCuponComponent implements OnInit {
 
   ngOnInit(): void {
     this.obtenerAsignados();
-    //this.obtenerAsignados();
-    setTimeout(()=>{
-      
-      for (let ele of this.asignables){
-        for(let ili of this.matches){
-          if (ele.idproducto==ili.idproducto){
-            this.asignados.push(ele);
-          }
-        }
-      }console.log(this.asignados);
 
-      },1000)
+    
   }
 
   obtenerProductos(){
@@ -64,6 +55,22 @@ export class AsignarCuponComponent implements OnInit {
 
     this.obtenerProductos();
     this.obtenerMatches();
+
+    setTimeout(()=>{
+      this.loading=false;
+    },500)
+
+    setTimeout(()=>{
+      
+      for (let ele of this.asignables){
+        for(let ili of this.matches){
+          if (ele.idproducto==ili.idproducto){
+            this.asignados.push(ele);
+          }
+        }
+      }console.log(this.asignados);
+
+      },500)
     
   }
 

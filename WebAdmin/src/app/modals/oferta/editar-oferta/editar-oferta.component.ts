@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EditarOfertaComponent implements OnInit {
 
+  imgFile: File = null;
   imgUrl:string=this.data.imagen;
   changed:boolean=false;
 
@@ -52,7 +53,7 @@ export class EditarOfertaComponent implements OnInit {
   form: FormGroup = this.fb.group({
     nombre:[this.data.nombre,[Validators.required,]],
     descripcion:[this.data.descripcion,[Validators.required,]],
-    descuento:[this.data.descuento,[Validators.required,]],
+    descuento:[this.data.descuento,[Validators.required,Validators.pattern("^[0-9]*[.]?[0-9]*$"),]],
     imagen:['',],
     visible:[this.data.visible],
     fechainicio:[this.data.fechainicio,[Validators.required,]],
@@ -80,7 +81,7 @@ export class EditarOfertaComponent implements OnInit {
         this.imgUrl = event.target.result;
       }
       this.form.value.imagen = event.target.files[0];
-      console.log(event);
+      this.imgFile = <File>event.target.files[0];
     }
     
   }
@@ -94,7 +95,7 @@ export class EditarOfertaComponent implements OnInit {
         uploadData.append('nombre', this.form.value.nombre);
         uploadData.append('descripcion', this.form.value.descripcion);
         uploadData.append('descuento', this.form.value.descuento);
-        uploadData.append('imagen', this.form.value.imagen, this.form.value.imagen.name);
+        uploadData.append('imagen', this.imgFile, this.imgFile.name);
         uploadData.append('visible', this.form.value.visible);
         uploadData.append('fechainicio', this.form.value.fechainicio);
         uploadData.append('fechafin', this.form.value.fechafin);
@@ -136,7 +137,7 @@ export class EditarOfertaComponent implements OnInit {
         )
       }
     }else{
-      this.toastr.warning("Asegurese de enviar todos los campos requeridos"); 
+      this.toastr.warning("Asegurese de enviar los campos tal como se solicita"); 
     }
     
 

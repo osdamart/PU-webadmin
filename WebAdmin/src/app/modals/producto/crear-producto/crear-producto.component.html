@@ -20,16 +20,20 @@
             </div>
         </div>
         <div class="form-group mb-3">
-            <input type="number" placeholder="Precio"
+            <input type="text" placeholder="Precio"
             [class.is-invalid]="precio.invalid && precio.touched"   
             class="form-control" formControlName="precio" autofocus>
+            <div *ngIf="precio.invalid && precio.touched">
+                <small *ngIf="precio.errors?.pattern" class="text-danger">
+                    Este campo solo puede contener números</small>
+            </div>
             <div *ngIf="precio.invalid && precio.touched">
                 <small *ngIf="precio.errors?.required" class="text-danger">
                     Campo obligatorio</small>
             </div>
         </div>
         <div class="form-group mb-3">
-            <input type="file" placeholder="Imagen" 
+            <input type="file" placeholder="Imagen" accept="image/*"
             [class.is-invalid]="imagen.invalid && imagen.touched"   
             class="form-control" (change)="onImageChanged($event)" formControlName="imagen" autofocus>
             <div *ngIf="imagen.invalid && imagen.touched">

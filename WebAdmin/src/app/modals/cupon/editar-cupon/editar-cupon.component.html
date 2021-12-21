@@ -5,9 +5,13 @@
             <div class="col-md-6">
                 <div class="form-group mb-3">
                     <label class="form-label">Cantidad de cupones</label>
-                    <input type="number" placeholder="Cantidad de cupones"
+                    <input type="text" placeholder="Cantidad de cupones"
                     [class.is-invalid]="cantidad.invalid && cantidad.touched"   
                     class="form-control" formControlName="cantidad" autofocus>
+                    <div *ngIf="cantidad.invalid && cantidad.touched">
+                        <small *ngIf="cantidad.errors?.pattern" class="text-danger">
+                            Este campo solo puede contener números</small>
+                    </div>
                     <div *ngIf="cantidad.invalid && cantidad.touched">
                         <small *ngIf="cantidad.errors?.required" class="text-danger">
                             Campo obligatorio</small>
@@ -39,18 +43,30 @@
         
                 <div class="form-group mb-3">
                     <label class="form-label">Descuento</label>
-                    <input type="number" placeholder="Descuento"
+                    <input type="text" placeholder="Descuento"
                     class="form-control" formControlName="descuento" autofocus>
                     <div *ngIf="descuento.invalid && descuento.touched">
+                        <small *ngIf="descuento.errors?.pattern" class="text-danger">
+                            Este campo solo puede contener números </small>
+                    </div>
+                    <div *ngIf="descuento.invalid && descuento.touched">
                         <small *ngIf="descuento.errors?.required" class="text-danger">
-                            Campo obligatorio</small>
+                            Campo obligatorio </small>
                     </div>
                 </div>
         
                 <div class="form-group mb-3">
                     <label class="form-label">Precio mínimo para aplicar el cupón</label>
-                    <input type="number" placeholder="Precio mínimo para aplicar al cupón"
+                    <input type="text" placeholder="Precio mínimo para aplicar al cupón"
                     class="form-control" formControlName="preciominimo" autofocus>
+                    <div *ngIf="preciominimo.invalid && preciominimo.touched">
+                        <small *ngIf="preciominimo.errors?.pattern" class="text-danger">
+                            Este campo solo puede contener números </small>
+                    </div>
+                    <div *ngIf="preciominimo.invalid && preciominimo.touched">
+                        <small *ngIf="preciominimo.errors?.required" class="text-danger">
+                            Campo obligatorio </small>
+                    </div>
                 </div>
         
                 <div class="form-group mb-3">

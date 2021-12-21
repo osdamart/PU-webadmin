@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class EditarCuponComponent implements OnInit {
 
+  imgFile: File = null;
   imgUrl:string=this.data.imagen;
   changed:boolean=false;
 
@@ -60,14 +61,14 @@ export class EditarCuponComponent implements OnInit {
   }
 
   form: FormGroup = this.fb.group({
-    cantidad:[this.data.cantidad,[Validators.required,]],
+    cantidad:[this.data.cantidad,[Validators.required,Validators.pattern("^[0-9]*$"),]],
     nombre:[this.data.nombre,[Validators.required,]],
     descripcion:[this.data.descripcion,[Validators.required,]],
-    descuento:[this.data.descuento,],
+    descuento:[this.data.descuento,[Validators.required,Validators.pattern("^[0-9]*[.]?[0-9]*$"),]],
     imagen:['',],
     visible:[this.data.visible],
     limitediario:[this.data.limitediario,],
-    preciominimo:[this.data.preciominimo,],
+    preciominimo:[this.data.preciominimo,[Validators.required,Validators.pattern("^[0-9]*[.]?[0-9]*$"),]],
     fechainicio:[this.data.fechainicio,[Validators.required,]],
     fechafin:[this.data.fechafin,[Validators.required,]],
     idtipocupon:[1],
@@ -92,7 +93,7 @@ export class EditarCuponComponent implements OnInit {
         this.imgUrl = event.target.result;
       }
       this.form.value.imagen = event.target.files[0];
-      console.log(event);
+      this.imgFile = <File>event.target.files[0];
     }
     
   }
@@ -107,7 +108,7 @@ export class EditarCuponComponent implements OnInit {
       uploadData.append('nombre', this.form.value.nombre);
       uploadData.append('descripcion', this.form.value.descripcion);
       uploadData.append('descuento', this.form.value.descuento);
-      uploadData.append('imagen', this.form.value.imagen, this.form.value.imagen.name);
+      uploadData.append('imagen', this.imgFile, this.imgFile.name);
       uploadData.append('visible', this.form.value.visible);
       uploadData.append('idtipocupon', this.form.value.idtipocupon);
       uploadData.append('limitediario', this.form.value.limitediario);
@@ -154,7 +155,7 @@ export class EditarCuponComponent implements OnInit {
         )
       }
     }else{
-      this.toastr.warning("Asegurese de enviar todos los campos requeridos"); 
+      this.toastr.warning("Asegurese de enviar los campos tal como se solicita"); 
     }
     
 
